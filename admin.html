@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | AL-MAKKAH Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./public/css/admin.css">
+</head>
+
+<body>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="login-logo">A</div>
+            <h2>Admin Login</h2>
+            <p>AL-MAKKAH Crockery & Kitchen Store</p>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Admin Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Login Securely</button>
+                <div id="loginError" class="error-msg"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboard" class="dashboard" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="logo-mark">A</span> AL-MAKKAH
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" onclick="switchTab('products', event)"><i class="fas fa-box"></i>
+                    Products</button>
+                <button class="nav-btn" onclick="switchTab('orders', event)"><i class="fas fa-shopping-bag"></i>
+                    Orders</button>
+                <button class="nav-btn logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1 id="pageTitle">Manage Products</h1>
+                <button class="btn-primary" onclick="openAddModal()">
+                    <i class="fas fa-plus"></i> Add Product
+                </button>
+            </header>
+
+            <!-- Products Section -->
+            <section id="productsSection" class="content-section">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price (Rs.)</th>
+                                <th>Stock</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="ordersSection" class="content-section" style="display: none;">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Total (Rs.)</th>
+                                <th>Items</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="addProductModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            <h2 id="modalTitle">Add New Product</h2>
+            <form id="addProductForm">
+                <input type="hidden" id="editProductId">
+                <div class="form-group">
+                    <label>Product Name *</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <select id="productCategory" required>
+                            <option value="crockery">Crockery</option>
+                            <option value="cookware">Cookware</option>
+                            <option value="plastic-fibre">Plastic & Fibre</option>
+                            <option value="pipe-fittings">Pipe Fittings</option>
+                            <option value="kitchen-tools">Kitchen Tools</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Category Display Name *</label>
+                        <input type="text" id="productCategoryName" placeholder="e.g., Crockery" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Price (Rs.) *</label>
+                        <input type="number" id="productPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Original Price (Rs.)</label>
+                        <input type="number" id="productOriginalPrice">
+                    </div>
+                    <div class="form-group">
+                        <label>Stock *</label>
+                        <input type="number" id="productStock" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Badge (e.g., Best Seller)</label>
+                        <input type="text" id="productBadge">
+                    </div>
+                    <div class="form-group">
+                        <label>Featured? (true/false)</label>
+                        <select id="productFeatured">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Product Image (Leave blank if editing)</label>
+                    <input type="file" id="productImage" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="productDescription" rows="3" required></textarea>
+                </div>
+                <button type="submit" id="saveProductBtn" class="btn-primary btn-block">Save Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./public/js/supabase-config.js"></script>
+    <script src="./public/js/admin.js"></script>
+</body>
+
+</html>
