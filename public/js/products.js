@@ -465,13 +465,13 @@ const STORE_CONFIG = {
 
     // ⚠️ IMPORTANT: Replace this with your actual WhatsApp number
     // Format: Country code + number (no +, spaces, or dashes)
-    // Example: 923001234567 for Pakistan +92 300 1234567
-    whatsappNumber: "+923028140670", // <-- UPDATED THIS LINE
+    // Example: 0301456785 for Pakistan 03123456786
+    whatsappNumber: "923028140670", // <-- UPDATED THIS LINE
 
     currency: "PKR",
     currencySymbol: "Rs.",
     freeShippingThreshold: 10000,
-    shippingFee: 250,
+    shippingFee: 100,
     cooperativeDiscount: 0.10, // 10% additional for cooperatives
     taxRate: 0, // Set tax rate if applicable
 };

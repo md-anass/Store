@@ -235,11 +235,21 @@ function closeCart() {
    MODALS
    ============================================ */
 function initModals() {
-    // Checkout Modal
-    document.getElementById('checkoutClose').addEventListener('click', closeCheckout);
-    document.getElementById('checkoutOverlay').addEventListener('click', (e) => {
-        if (e.target.id === 'checkoutOverlay') closeCheckout();
-    });
+    function handleCheckout(e) {
+        e.preventDefault();
+
+        // Save customer info temporarily
+        window.checkoutCustomerInfo = {
+            name: document.getElementById('checkoutName').value,
+            phone: document.getElementById('checkoutPhone').value,
+            address: document.getElementById('checkoutAddress').value,
+            city: document.getElementById('checkoutCity').value,
+            notes: document.getElementById('checkoutNotes').value
+        };
+
+        closeCheckout();
+        openPaymentModal();
+    }
 
     // Quick View Modal
     document.getElementById('quickViewClose').addEventListener('click', closeQuickView);
@@ -851,3 +861,113 @@ function showToast(title, message, type = 'default') {
         setTimeout(() => toast.remove(), 300);
     }, 3500);
 }
+/* ============================================
+   PAYMENT MODAL LOGIC
+   ============================================ */
+let currentPaymentMethod = 'jazzcash';
+
+// IMPORTANT: Put the owner's real account numbers here!
+const paymentDetails = {
+    jazzcash: { name: 'JazzCash', number: '0300-1234567', title: 'JazzCash Number', advance: true },
+    easypaisa: { name: 'Easypaisa', number: '0345-1234567', title: 'Easypaisa Number', advance: true },
+    bank: { name: 'Bank Transfer', number: 'PK36SCBL0000001123456702', title: 'Bank IBAN', advance: true },
+    cod: { name: 'Cash on Delivery', number: 'Pay when rider delivers', title: 'Payment on Arrival', advance: false }
+};
+
+function openPaymentModal() {
+    document.getElementById('paymentTotalAmount').innerText = `${STORE_CONFIG.currencySymbol} ${cart.getTotal().toLocaleString()}`;
+    selectPaymentMethod('jazzcash', null); // Default to JazzCash
+    document.getElementById('paymentOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function selectPaymentMethod(method, e) {
+    currentPaymentMethod = method;
+    const details = paymentDetails[method];
+
+    // Update active button styling
+    document.querySelectorAll('.pay-method-btn').forEach(btn => btn.classList.remove('active'));
+    if (e) {
+        e.target.classList.add('active');
+    } else {
+        // Fallback for initial load
+        const firstBtn = document.querySelector('.pay-method-btn');
+        if (firstBtn) firstBtn.classList.add('active');
+    }
+
+    // Update account details display
+    document.getElementById('paymentAccounts').innerHTML = `
+        <div class="account-box">
+            <span>${details.title}</span>
+            <strong>${details.number}</strong>
+        </div>
+    `;
+
+    // Show/hide TID input and update delivery info
+    const tidBox = document.getElementById('tidInputBox');
+    const deliveryInfo = document.getElementById('deliveryInfo');
+
+    if (details.advance) {
+        // Advance Payment Logic
+        tidBox.style.display = 'block';
+        document.getElementById('transactionId').setAttribute('required', 'true');
+        deliveryInfo.innerHTML = `<i class="fas fa-shipping-fast"></i> Send the amount via ${details.name}, enter the TID above, and your product will be delivered in 1-2 working days after payment verification.`;
+    } else {
+        // COD Logic
+        tidBox.style.display = 'none';
+        document.getElementById('transactionId').removeAttribute('required');
+        document.getElementById('transactionId').value = 'N/A (COD)';
+        deliveryInfo.innerHTML = `<i class="fas fa-truck"></i> Order now and pay in cash when the package arrives at your doorstep!`;
+    }
+}
+
+// Handle final payment confirmation
+document.addEventListener('DOMContentLoaded', () => {
+    const paymentClose = document.getElementById('paymentClose');
+    if (paymentClose) {
+        paymentClose.addEventListener('click', () => {
+            document.getElementById('paymentOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+    if (confirmPaymentBtn) {
+        confirmPaymentBtn.addEventListener('click', async () => {
+            const tid = document.getElementById('transactionId').value;
+            const isAdvance = paymentDetails[currentPaymentMethod].advance;
+
+            // If advance payment, TID is required
+            if (isAdvance && (!tid || tid === '')) {
+                alert('Please enter your Transaction ID (TID) to confirm the order.');
+                return;
+            }
+
+            const paymentInfo = {
+                method: paymentDetails[currentPaymentMethod].name,
+                transactionId: isAdvance ? tid : 'Cash on Delivery',
+                advance: isAdvance
+            };
+
+            // Disable button
+            confirmPaymentBtn.disabled = true;
+            confirmPaymentBtn.innerText = 'Processing...';
+
+            // Send order via WhatsApp & Save to Supabase
+            await cart.sendOrder(window.checkoutCustomerInfo, paymentInfo);
+
+            showToast('Order Placed!', 'Your order has been forwarded via WhatsApp', 'success');
+
+            // Reset everything
+            setTimeout(() => {
+                document.getElementById('paymentOverlay').classList.remove('active');
+                document.body.style.overflow = '';
+                cart.clearCart();
+                document.getElementById('checkoutForm').reset();
+                document.getElementById('transactionId').value = '';
+                confirmPaymentBtn.disabled = false;
+                confirmPaymentBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Confirm Order';
+            }, 2000);
+        });
+    }
+});

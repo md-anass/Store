@@ -2791,3 +2791,25 @@ select {
         padding: 40px 20px;
     }
 }
+
+/* Payment Method Active State */
+.pay-method-btn.active {
+    background: linear-gradient(135deg, var(--color-gold-dark), var(--color-gold)) !important;
+    color: var(--color-bg) !important;
+    border-color: transparent !important;
+}
+
+.account-box span {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.account-box strong {
+    font-size: 1.2rem;
+    color: var(--color-gold);
+    display: block;
+    margin-top: 5px;
+    font-family: var(--font-heading);
+}

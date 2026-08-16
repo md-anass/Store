@@ -518,15 +518,15 @@
                         <li>
                             <i class="fas fa-user-tie"></i>
                             <div>
-                                <span>Proprietor</span>
-                                <strong>TASAWAR NOOR</strong>
+                                <span>Owner</span>
+                                <strong>Toseeq Anwer</strong>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <span>Visit Our Store</span>
-                                <strong>Main Bazaar, Pakistan</strong>
+                                <strong>Near 122 mor, Silawali Road, Sargodha</strong>
                             </div>
                         </li>
                         <li>
@@ -681,7 +681,91 @@
             </div>
         </div>
     </div>
+    <!-- ===================== PAYMENT MODAL ===================== -->
+    <div class="modal-overlay" id="paymentOverlay">
+        <div class="modal" style="max-width: 500px;">
+            <button class="modal-close" id="paymentClose"><i class="fas fa-times"></i></button>
+            <div class="checkout-header">
+                <h2><i class="fas fa-wallet"></i> Complete Your Order</h2>
+                <p>Choose your preferred payment method</p>
+            </div>
+            <div class="checkout-body">
+                <!-- Total Amount -->
+                <div
+                    style="background: var(--color-card); padding: 16px; border-radius: 12px; text-align: center; margin-bottom: 20px; border: 1px solid var(--color-gold);">
+                    <span style="font-size: 0.8rem; color: var(--color-text-muted);">Total Amount</span>
+                    <h2 id="paymentTotalAmount"
+                        style="font-family: var(--font-heading); color: var(--color-gold); font-size: 2rem; margin: 0;">
+                        Rs. 0</h2>
+                </div>
 
+                <!-- Payment Method Selector (2x2 Grid) -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                    <button class="pay-method-btn active"
+                        onclick="selectPaymentMethod('jazzcash', event)">JazzCash</button>
+                    <button class="pay-method-btn" onclick="selectPaymentMethod('easypaisa', event)">Easypaisa</button>
+                    <button class="pay-method-btn" onclick="selectPaymentMethod('bank', event)">Bank Transfer</button>
+                    <button class="pay-method-btn" onclick="selectPaymentMethod('cod', event)">Cash on Delivery</button>
+                </div>
+
+                <!-- Account Details Box -->
+                <div id="paymentAccounts"
+                    style="background: var(--color-card); padding: 16px; border-radius: 12px; margin-bottom: 20px; text-align: center; border: 1px solid var(--color-border);">
+                </div>
+
+                <!-- Delivery Info Box -->
+                <div id="deliveryInfo"
+                    style="font-size: 0.8rem; color: var(--color-text-muted); text-align: center; margin-bottom: 20px; padding: 0 10px;">
+                </div>
+
+                <!-- Transaction ID Input (Hidden for COD) -->
+                <div class="form-group" id="tidInputBox">
+                    <label>Enter Transaction ID / TID *</label>
+                    <input type="text" id="transactionId" placeholder="e.g., 8459302145">
+                </div>
+
+                <button class="btn btn-primary btn-block" id="confirmPaymentBtn">
+                    <i class="fab fa-whatsapp"></i> Confirm Order
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Total Amount -->
+    <div
+        style="background: var(--color-card); padding: 16px; border-radius: 12px; text-align: center; margin-bottom: 20px; border: 1px solid var(--color-gold);">
+        <span style="font-size: 0.8rem; color: var(--color-text-muted);">Amount to Pay</span>
+        <h2 id="paymentTotalAmount"
+            style="font-family: var(--font-heading); color: var(--color-gold); font-size: 2rem; margin: 0;">
+            Rs. 0</h2>
+    </div>
+
+    <!-- Payment Method Selector -->
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <button class="pay-method-btn active" onclick="selectPaymentMethod('jazzcash', event)"
+            style="flex:1; padding: 10px; background: var(--color-card); border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text); font-weight: 600; cursor: pointer;">JazzCash</button>
+        <button class="pay-method-btn" onclick="selectPaymentMethod('easypaisa', event)"
+            style="flex:1; padding: 10px; background: var(--color-card); border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text); font-weight: 600; cursor: pointer;">Easypaisa</button>
+        <button class="pay-method-btn" onclick="selectPaymentMethod('bank', event)"
+            style="flex:1; padding: 10px; background: var(--color-card); border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text); font-weight: 600; cursor: pointer;">Bank</button>
+    </div>
+
+    <!-- Account Details Box -->
+    <div id="paymentAccounts"
+        style="background: var(--color-card); padding: 16px; border-radius: 12px; margin-bottom: 20px; text-align: center; border: 1px solid var(--color-border);">
+    </div>
+
+    <!-- Transaction ID Input -->
+    <div class="form-group">
+        <label>Enter Transaction ID / TID *</label>
+        <input type="text" id="transactionId" placeholder="e.g., 8459302145" required>
+    </div>
+
+    <button class="btn btn-primary btn-block" id="confirmPaymentBtn">
+        <i class="fab fa-whatsapp"></i> Confirm Order & Send Receipt
+    </button>
+    </div>
+    </div>
+    </div>
     <!-- ===================== TOAST CONTAINER ===================== -->
     <div class="toast-container" id="toastContainer"></div>
 

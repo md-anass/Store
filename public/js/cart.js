@@ -276,7 +276,7 @@ class ShoppingCart {
     }
 
     /* ---------- Generate WhatsApp Order Message ---------- */
-    generateOrderMessage(customerInfo) {
+    generateOrderMessage(customerInfo, paymentInfo) {
         let message = `🛒 *NEW ORDER - ${STORE_CONFIG.name}*\n`;
         message += `${'═'.repeat(40)}\n\n`;
         message += `👤 *Customer Details:*\n`;
@@ -287,8 +287,18 @@ class ShoppingCart {
         if (customerInfo.notes) {
             message += `   Notes: ${customerInfo.notes}\n`;
         }
-        message += `\n📦 *Order Items:*\n`;
 
+        message += `\n💳 *Payment Details:*\n`;
+        message += `   Method: ${paymentInfo.method}\n`;
+
+        if (paymentInfo.advance) {
+            message += `   TID: ${paymentInfo.transactionId}\n`;
+            message += `   ⚠️ Action: Verify payment in app, then ship in 1-2 days.\n`;
+        } else {
+            message += `   Status: Cash on Delivery (Collect cash on arrival)\n`;
+        }
+
+        message += `\n📦 *Order Items:*\n`;
         this.items.forEach((item, index) => {
             const itemTotal = item.price * item.quantity;
             message += `   ${index + 1}. ${item.name}\n`;
@@ -299,12 +309,10 @@ class ShoppingCart {
         message += `\n${'─'.repeat(40)}\n`;
         message += `💰 *Order Summary:*\n`;
         message += `   Subtotal: ${STORE_CONFIG.currencySymbol} ${this.getSubtotal().toLocaleString()}\n`;
-
         const savings = this.getSavings();
         if (savings > 0) {
             message += `   Discount Saved: -${STORE_CONFIG.currencySymbol} ${savings.toLocaleString()}\n`;
         }
-
         const shipping = this.getShipping();
         message += `   Shipping: ${shipping === 0 ? 'FREE' : `${STORE_CONFIG.currencySymbol} ${shipping.toLocaleString()}`}\n`;
         message += `   *Total: ${STORE_CONFIG.currencySymbol} ${this.getTotal().toLocaleString()}*\n`;
@@ -317,8 +325,20 @@ class ShoppingCart {
     }
 
     /* ---------- Send Order via WhatsApp & Save to Supabase ---------- */
-    async sendOrder(customerInfo) {
-        // 1. Save the order to Supabase Database (if configured)
+    async sendOrder(customerInfo, paymentInfo) {
+        // 1. Generate the Message
+        const message = this.generateOrderMessage(customerInfo, paymentInfo);
+
+        // 2. Clean the phone number (remove +, spaces, dashes)
+        const cleanNumber = STORE_CONFIG.whatsappNumber.replace(/[^0-9]/g, '');
+
+        // 3. Create the WhatsApp URL using the official API link
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${cleanNumber}&text=${message}`;
+
+        // 4. Open WhatsApp in a new tab
+        const whatsappWindow = window.open(whatsappUrl, '_blank');
+
+        // 5. Save the order to Supabase Database in the background
         if (typeof supabaseClient !== 'undefined' && supabaseClient) {
             try {
                 const { error } = await supabaseClient
@@ -331,13 +351,14 @@ class ShoppingCart {
                             customer_city: customerInfo.city,
                             order_notes: customerInfo.notes,
                             total_amount: this.getTotal(),
-                            order_items: this.items // Saves the cart array as JSON
+                            order_items: this.items,
+                            payment_method: paymentInfo.method,
+                            transaction_id: paymentInfo.transactionId
                         }
                     ]);
 
                 if (error) {
                     console.error("Supabase Error:", error);
-                    showToast("Database Error", "Could not save order to database, but proceeding to WhatsApp.", "error");
                 } else {
                     console.log("Order saved to Supabase successfully!");
                 }
@@ -346,10 +367,9 @@ class ShoppingCart {
             }
         }
 
-        // 2. Generate WhatsApp Message and Open Chat
-        const message = this.generateOrderMessage(customerInfo);
-        const whatsappUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${message}`;
-        window.open(whatsappUrl, '_blank');
+        if (!whatsappWindow || whatsappWindow.closed || typeof whatsappWindow.closed == 'undefined') {
+            window.location.href = whatsappUrl;
+        }
     }
 }
 
