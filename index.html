@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AL-MAKKAH Crockery & Kitchen Store — Premium kitchenware, crockery, cookware, plastic items, pipe fittings and more. Special discounts for cooperatives.">
+    <title>AL-MAKKAH Crockery & Kitchen Store | Premium Kitchenware</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23d4af37'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%230d0d0d' font-family='serif'>A</text></svg>">
+</head>
+
+<body>
+
+    <!-- ===================== LOADING SCREEN ===================== -->
+    <div class="loader" id="loader" style="display: none !important;">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <span class="loader-letter" style="--delay: 0s">A</span>
+                <span class="loader-letter" style="--delay: 0.1s">L</span>
+                <span class="loader-dash">—</span>
+                <span class="loader-letter" style="--delay: 0.2s">M</span>
+                <span class="loader-letter" style="--delay: 0.3s">A</span>
+                <span class="loader-letter" style="--delay: 0.4s">K</span>
+                <span class="loader-letter" style="--delay: 0.5s">K</span>
+                <span class="loader-letter" style="--delay: 0.6s">A</span>
+                <span class="loader-letter" style="--delay: 0.7s">H</span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-bar-fill"></div>
+            </div>
+            <p class="loader-text">Premium Kitchenware Collection</p>
+        </div>
+    </div>
+
+    <!-- ===================== SCROLL PROGRESS ===================== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="logo-mark">A</span>
+                <div class="logo-text">
+                    <span class="logo-primary">AL-MAKKAH</span>
+                    <span class="logo-secondary">Crockery & Kitchen Store</span>
+                </div>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#categories" class="nav-link">Categories</a></li>
+                <li><a href="#featured" class="nav-link">Featured</a></li>
+                <li><a href="#products" class="nav-link">Shop All</a></li>
+                <li><a href="#cooperatives" class="nav-link">Cooperatives</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="nav-icon-btn" id="searchToggle" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="nav-icon-btn cart-btn" id="cartToggle" aria-label="Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar" id="searchBar">
+            <div class="search-bar-inner">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search for dinner sets, cookware, pipes..."
+                    autocomplete="off">
+                <button class="search-close" id="searchClose"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO SECTION ===================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+
+        <div class="hero-floating hero-float-1" data-parallax="0.3">
+            <i class="fas fa-mug-hot"></i>
+        </div>
+        <div class="hero-floating hero-float-2" data-parallax="0.5">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <div class="hero-floating hero-float-3" data-parallax="0.2">
+            <i class="fas fa-blender"></i>
+        </div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge" data-aos="fade-down">
+                    <span class="badge-dot"></span>
+                    Trusted Kitchenware Provider Since 2005
+                </div>
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+                    Elevate Your <br>
+                    <span class="hero-title-accent">Kitchen Experience</span>
+                </h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+                    Discover our premium collection of crockery, cookware, plastic items,
+                    fibre products, and pipe fittings — curated for homes, restaurants,
+                    and cooperative societies.
+                </p>
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#products" class="btn btn-primary">
+                        <span>Shop Collection</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#categories" class="btn btn-ghost">
+                        <i class="fas fa-th-large"></i>
+                        <span>Browse Categories</span>
+                    </a>
+                </div>
+
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="hero-stat">
+                        <span class="stat-number" data-count="5000">0</span>
+                        <span class="stat-label">Happy Customers</span>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="stat-number" data-count="1200">0</span>
+                        <span class="stat-label">Premium Products</span>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="stat-number" data-count="20">0</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <span>Scroll to Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ===================== TRUST STRIP ===================== -->
+    <section class="trust-strip">
+        <div class="container">
+            <div class="trust-items">
+                <div class="trust-item" data-aos="fade-up">
+                    <i class="fas fa-truck"></i>
+                    <div>
+                        <h4>Fast Delivery</h4>
+                        <p>Across Pakistan</p>
+                    </div>
+                </div>
+                <div class="trust-item" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <h4>Quality Guaranteed</h4>
+                        <p>Premium Materials</p>
+                    </div>
+                </div>
+                <div class="trust-item" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-tags"></i>
+                    <div>
+                        <h4>Best Prices</h4>
+                        <p>Wholesale & Retail</p>
+                    </div>
+                </div>
+                <div class="trust-item" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-handshake"></i>
+                    <div>
+                        <h4>Cooperative Discounts</h4>
+                        <p>Special Pricing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CATEGORIES ===================== -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-eyebrow">Explore</span>
+                <h2 class="section-title">Shop by Category</h2>
+                <p class="section-description">Browse our curated collections for every kitchen need</p>
+            </div>
+
+            <div class="category-grid" id="categoryGrid">
+                <!-- Categories rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FEATURED PRODUCTS ===================== -->
+    <section class="featured" id="featured">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-eyebrow">Handpicked</span>
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-description">Our most popular items loved by customers</p>
+            </div>
+
+            <div class="featured-grid" id="featuredGrid">
+                <!-- Featured products rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== COOPERATIVES BANNER ===================== -->
+    <section class="cooperatives-banner" id="cooperatives">
+        <div class="container">
+            <div class="coop-content" data-aos="zoom-in">
+                <div class="coop-badge">
+                    <i class="fas fa-award"></i>
+                    <span>Exclusive Offer</span>
+                </div>
+                <h2 class="coop-title">Special Discount for Cooperatives</h2>
+                <p class="coop-text">
+                    Are you a cooperative society, housing society, or bulk buyer?
+                    Enjoy exclusive wholesale pricing, dedicated support, and priority delivery
+                    on all orders. Partner with us for the best deals on kitchenware and fittings.
+                </p>
+                <div class="coop-features">
+                    <div class="coop-feature">
+                        <i class="fas fa-percentage"></i>
+                        <span>Up to 30% Off</span>
+                    </div>
+                    <div class="coop-feature">
+                        <i class="fas fa-boxes"></i>
+                        <span>Bulk Order Support</span>
+                    </div>
+                    <div class="coop-feature">
+                        <i class="fas fa-headset"></i>
+                        <span>Dedicated Account Manager</span>
+                    </div>
+                    <div class="coop-feature">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>Free Delivery on Bulk</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary coop-cta" onclick="openCooperativeForm()">
+                    <i class="fas fa-handshake"></i>
+                    <span>Register Your Cooperative</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ALL PRODUCTS ===================== -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-eyebrow">Our Collection</span>
+                <h2 class="section-title">Complete Product Range</h2>
+                <p class="section-description">Filter and explore our full inventory</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="products-toolbar" data-aos="fade-up">
+                <div class="filter-pills" id="filterPills">
+                    <button class="filter-pill active" data-filter="all">All Products</button>
+                    <button class="filter-pill" data-filter="crockery">Crockery</button>
+                    <button class="filter-pill" data-filter="cookware">Cookware</button>
+                    <button class="filter-pill" data-filter="plastic-fibre">Plastic & Fibre</button>
+                    <button class="filter-pill" data-filter="pipe-fittings">Pipe Fittings</button>
+                    <button class="filter-pill" data-filter="kitchen-tools">Kitchen Tools</button>
+                </div>
+
+                <div class="toolbar-right">
+                    <select class="sort-select" id="sortSelect">
+                        <option value="featured">Sort: Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="name">Alphabetical</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products rendered by JS -->
+            </div>
+
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No products found</h3>
+                <p>Try adjusting your filters or search terms</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ABOUT SECTION ===================== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual" data-aos="fade-right">
+                    <div class="about-image-stack">
+                        <div class="about-img-main">
+                            <div class="about-img-pattern"></div>
+                            <i class="fas fa-store about-img-icon"></i>
+                        </div>
+                        <div class="about-experience-badge">
+                            <span class="exp-number">20+</span>
+                            <span class="exp-text">Years of Excellence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-content" data-aos="fade-left">
+                    <span class="section-eyebrow">Our Story</span>
+                    <h2 class="section-title">A Legacy of Quality Kitchenware</h2>
+                    <p class="about-text">
+                        AL-MAKKAH Crockery & Kitchen Store has been a trusted name in kitchenware
+                        for over two decades. From elegant dinner sets to durable cookware, practical
+                        plastic items, and reliable pipe fittings — we offer everything your kitchen needs
+                        under one roof.
+                    </p>
+                    <p class="about-text">
+                        Our commitment to quality, competitive pricing, and exceptional customer service
+                        has made us the preferred choice for households, restaurants, and cooperative
+                        societies across the region.
+                    </p>
+
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-check"></i></div>
+                            <div>
+                                <h4>Premium Quality Products</h4>
+                                <p>Sourced from trusted manufacturers</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-check"></i></div>
+                            <div>
+                                <h4>Wholesale & Retail</h4>
+                                <p>Competitive pricing for all needs</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-check"></i></div>
+                            <div>
+                                <h4>Cooperative Society Discounts</h4>
+                                <p>Special pricing for bulk orders</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-check"></i></div>
+                            <div>
+                                <h4>Wide Product Range</h4>
+                                <p>Everything for your kitchen</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== TESTIMONIALS ===================== -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-eyebrow">Testimonials</span>
+                <h2 class="section-title">What Our Customers Say</h2>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Excellent quality crockery at very reasonable prices. The dinner set I
+                        purchased is still as good as new after two years. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">F</div>
+                        <div>
+                            <h4>Fatima Khan</h4>
+                            <span>Lahore</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"We ordered bulk kitchenware for our housing society cooperative. The
+                        special discount was amazing and delivery was prompt. Will order again!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div>
+                            <h4>Rashid Ahmed</h4>
+                            <span>Cooperative Society Manager</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Best kitchen store in the area. Huge variety of products — from
+                        cookware to pipe fittings. The staff is knowledgeable and helpful."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div>
+                            <h4>Sana Malik</h4>
+                            <span>Restaurant Owner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== NEWSLETTER ===================== -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content" data-aos="zoom-in">
+                <i class="fas fa-envelope-open-text newsletter-icon"></i>
+                <h2>Stay Updated with Our Latest Offers</h2>
+                <p>Subscribe to get notified about new arrivals, special discounts, and cooperative deals</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">
+                        <span>Subscribe</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="#home" class="nav-logo">
+                        <span class="logo-mark">A</span>
+                        <div class="logo-text">
+                            <span class="logo-primary">AL-MAKKAH</span>
+                            <span class="logo-secondary">Crockery & Kitchen Store</span>
+                        </div>
+                    </a>
+                    <p class="footer-about">
+                        Your trusted partner for premium kitchenware, crockery, cookware,
+                        plastic items, fibre products, and pipe fittings. Quality you can rely on.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#products">Shop All</a></li>
+                        <li><a href="#cooperatives">Cooperatives</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="#products" onclick="filterProducts('crockery')">Crockery</a></li>
+                        <li><a href="#products" onclick="filterProducts('cookware')">Cookware</a></li>
+                        <li><a href="#products" onclick="filterProducts('plastic-fibre')">Plastic & Fibre</a></li>
+                        <li><a href="#products" onclick="filterProducts('pipe-fittings')">Pipe Fittings</a></li>
+                        <li><a href="#products" onclick="filterProducts('kitchen-tools')">Kitchen Tools</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-user-tie"></i>
+                            <div>
+                                <span>Proprietor</span>
+                                <strong>TASAWAR NOOR</strong>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span>Visit Our Store</span>
+                                <strong>Main Bazaar, Pakistan</strong>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <span>Business Hours</span>
+                                <strong>Mon–Sat: 9 AM – 9 PM</strong>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span>Email</span>
+                                <strong>info@almakkah-store.com</strong>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 AL-MAKKAH Crockery & Kitchen Store. All Rights Reserved.</p>
+                <div class="footer-payments">
+                    <span>We Accept:</span>
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fas fa-money-bill-wave"></i>
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================== CART DRAWER ===================== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Shopping Cart</h3>
+            <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="cart-body" id="cartBody">
+            <!-- Cart items rendered by JS -->
+        </div>
+
+        <div class="cart-footer" id="cartFooter">
+            <!-- Cart summary rendered by JS -->
+        </div>
+    </aside>
+
+    <!-- ===================== CHECKOUT MODAL ===================== -->
+    <div class="modal-overlay" id="checkoutOverlay">
+        <div class="modal checkout-modal">
+            <button class="modal-close" id="checkoutClose"><i class="fas fa-times"></i></button>
+
+            <div class="checkout-header">
+                <h2><i class="fas fa-clipboard-check"></i> Checkout</h2>
+                <p>Review your order and confirm via WhatsApp</p>
+            </div>
+
+            <div class="checkout-body">
+                <form class="checkout-form" id="checkoutForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="checkoutName" required placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="checkoutPhone" required placeholder="03XX-XXXXXXX">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Delivery Address *</label>
+                        <textarea id="checkoutAddress" required rows="2"
+                            placeholder="Complete delivery address"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City *</label>
+                            <input type="text" id="checkoutCity" required placeholder="Your city">
+                        </div>
+                        <div class="form-group">
+                            <label>Order Notes (Optional)</label>
+                            <input type="text" id="checkoutNotes" placeholder="Any special instructions">
+                        </div>
+                    </div>
+
+                    <div class="checkout-summary" id="checkoutSummary">
+                        <!-- Order summary rendered by JS -->
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block checkout-submit">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Confirm Order via WhatsApp</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== QUICK VIEW MODAL ===================== -->
+    <div class="modal-overlay" id="quickViewOverlay">
+        <div class="modal quick-view-modal" id="quickViewModal">
+            <button class="modal-close" id="quickViewClose"><i class="fas fa-times"></i></button>
+            <!-- Content rendered by JS -->
+        </div>
+    </div>
+
+    <!-- ===================== COOPERATIVE FORM MODAL ===================== -->
+    <div class="modal-overlay" id="coopOverlay">
+        <div class="modal coop-modal">
+            <button class="modal-close" id="coopClose"><i class="fas fa-times"></i></button>
+            <div class="checkout-header">
+                <h2><i class="fas fa-handshake"></i> Cooperative Registration</h2>
+                <p>Register your cooperative society for special discounts</p>
+            </div>
+            <div class="checkout-body">
+                <form class="checkout-form" id="coopForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Society / Organization Name *</label>
+                            <input type="text" required placeholder="Your cooperative society name">
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Person *</label>
+                            <input type="text" required placeholder="Contact person name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" required placeholder="03XX-XXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Members</label>
+                            <input type="number" placeholder="Approximate members">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Products of Interest</label>
+                        <input type="text" placeholder="e.g., Crockery, Cookware, Pipe Fittings...">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block checkout-submit">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Submit Registration</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== TOAST CONTAINER ===================== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ===================== BACK TO TOP ===================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ===================== WHATSAPP FLOAT ===================== -->
+    <a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-config.js"></script>
+
+    <script src="/js/products.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>
+
+</html>
